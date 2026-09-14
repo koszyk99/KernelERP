@@ -1,2 +1,16 @@
 <Solution>
+  <Folder Name="/src/">
+    <Project Path="src/KernelErp.Api/KernelErp.Api.csproj" />
+    <Project Path="src/KernelErp.Core/KernelErp.Core.csproj" />
+    <Project Path="src/KernelErp.Finance/KernelErp.Finance.csproj" />
+    <Project Path="src/KernelErp.HR/KernelErp.HR.csproj" />
+    <Project Path="src/KernelErp.Infrastructure/KernelErp.Infrastructure.csproj" />
+    <Project Path="src/KernelErp.Production/KernelErp.Production.csproj" />
+    <Project Path="src/KernelErp.Sales/KernelErp.Sales.csproj" />
+    <Project Path="src/KernelErp.Warehouse/KernelErp.Warehouse.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/KernelErp.Core.Tests/KernelErp.Core.Tests.csproj" />
+    <Project Path="tests/KernelErp.Warehouse.Tests/KernelErp.Warehouse.Tests.csproj" />
+  </Folder>
 </Solution>
