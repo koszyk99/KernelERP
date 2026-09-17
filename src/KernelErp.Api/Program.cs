@@ -1,4 +1,12 @@
+using KernelErp.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Register the database context, using the connection string from configuration
+// (User Secrets locally, environment variable/appsettings in production)
+builder.Services.AddDbContext<KernelErpDbContext>(options => 
+    options.UseNpgsql(builder.Configuration.GetConnectionString("KernelErpDb")));
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
