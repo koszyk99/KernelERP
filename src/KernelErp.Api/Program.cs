@@ -8,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<KernelErpDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("KernelErpDb")));
 
+// Register support for controller-based endpoints (as opposed to minimal API).
+// Without this, classes like ProductsController are never discovered or routed to.
+builder.Services.AddControllers();
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -21,6 +25,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Maps incoming requests to the matching controller actions
+// (e.g. GET /api/products -> ProductsController.GetAll).
+app.MapControllers();
 
 var summaries = new[]
 {
