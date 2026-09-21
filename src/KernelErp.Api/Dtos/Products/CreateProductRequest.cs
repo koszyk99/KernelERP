@@ -1,0 +1,1 @@
+namespace KernelErp.Api.Dtos.Products;
