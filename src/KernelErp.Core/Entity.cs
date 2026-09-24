@@ -12,7 +12,7 @@ public abstract class Entity
     public Guid Id { get ; set; } = Guid.NewGuid();
 
     // Timestamp of when the record was created - set once, at creation time.
-    public DateTime CreateAt { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     // Timestamp of the last update - null until the record is modified.
     public DateTime? UpdatedAt { get; set; }  
