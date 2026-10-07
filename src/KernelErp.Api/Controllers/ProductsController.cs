@@ -106,4 +106,48 @@ public class ProductsController : ControllerBase
         // plus the created product in the response body - standard REST convention.
         return CreatedAtAction(nameof(GetById), new { id = product.Id }, productResponse);
     }
+    
+    // PUT /api/products/{id}
+    // Full replacement of the editable fields (Name, Description, UnitPrice).
+    // Sku, Id and CreateAt are never touched by this endpoint.
+    [HttpPut("{id}")] 
+    public async Task<IActionResult> Update(Guid id, UpdateProductRequest request)
+    {
+        var product = await _dbcontext.Products.FindAsync(id);
+
+        if (product is null)
+        {
+            return NotFound();
+        }
+
+        // Apply the changes to the tracked entity - EF Core detect
+        // which fields changed and genarate the matching UPDATE statement.
+        product.Name = request.Name;
+        product.Description = request.Description;
+        product.UnitPrice = request.UnitPrice;
+        product.UpdatedAt = DateTime.UtcNow;
+
+        await _dbcontext.SaveChangesAsync();
+
+        // 204 No Content - standard REST convention for a successful update.
+        return NoContent();
+    }
+
+    // DELETE /api/products/{id}
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var product = await _dbcontext.Products.FindAsync(id);
+
+        if (product is null)
+        {
+            return NotFound();
+        }
+
+        _dbcontext.Products.Remove(product);
+        await _dbcontext.SaveChangesAsync();
+
+        // 204 No Content - standard REST convention for a successful delete.
+        return NoContent();
+    }
 }
